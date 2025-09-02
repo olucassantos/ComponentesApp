@@ -1,43 +1,29 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Home from "./app/Home";
+import Fotos from "./app/Fotos";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [imagem, setImagem] = useState(null);
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
 
-  return (
-    <View style={styles.container}>
-      <Text>Meus Bichinhos</Text>
+                <Stack.Screen 
+                    name="Home" 
+                    component={Home} 
+                    options={{ title: "Página Inicial" }}
+                />
 
-      <Image
-        source={imagem}
-        style={{ width: 200, height: 200 }}
-      />
+                <Stack.Screen 
+                    name="Fotos" 
+                    component={Fotos} 
+                    options={{ title: "Galeria de Fotos" }}
+                />
 
-      <View>
-        <Button 
-          title="Cabra 🐐"
-          onPress={() => setImagem(require('./assets/images/cabra.jpg'))}
-        />
-
-        <Button 
-          title="Canguru 🦘"
-          onPress={() => setImagem(require('./assets/images/canguru.png'))}
-        />
-
-        <Button 
-          title="Cobra 🐍"
-          onPress={() => {}}
-        />
-      </View>
-    </View>
-  );
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
